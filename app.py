@@ -160,4 +160,4 @@ with col_f1:
 with col_f2:
     st.markdown("[ GitHub Profile](https://github.com/2025akshat-lang)")
 with col_f3:
-    st.markdown("[ E-Portfolio](https://sites.google.com/view/akshat-raj-e-portfolio)")
+    st.markdown("[ E-Portfolio](https://sites.google.com/view/akshat-raj-e-portfolio/home)")
