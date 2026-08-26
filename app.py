@@ -155,9 +155,9 @@ elif "3. Complex Composition" in module:
 st.markdown("---")
 col_f1, col_f2, col_f3 = st.columns([3, 1, 1])
 with col_f1:
-    st.markdown("🚀 **Developed by Akshat Raj** | Spectroscopy Data Analytics Platform")
+    st.markdown(" **Developed by Akshat Raj** | Spectroscopy Data Analytics Platform")
 with col_f2:
-    st.markdown("[🌐 GitHub Profile](https://github.com/2025akshat-lang)")
+    st.markdown("[ GitHub Profile](https://github.com/2025akshat-lang)")
 with col_f3:
-    st.markdown("[🌐 E-Portfolio](https://sites.google.com/view/akshat-raj-e-portfolio/home)")
+    st.markdown("[ E-Portfolio](https://sites.google.com/view/akshat-raj-e-portfolio/home)")
 
