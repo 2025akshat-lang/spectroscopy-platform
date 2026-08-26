@@ -84,12 +84,15 @@ if "1. Concentration Analytics" in module:
 elif "2. Reaction Kinetics" in module:
     st.info("💡 Works for: Iodination of Acetone and Crystal Violet + NaOH Kinetics.")
     
-    # एरर यहाँ बिल्कुल ठीक कर दिया गया है
-    default_kinetics = {
-        "Time (seconds)":,
-        "Absorbance (Raw)": [2.0, 1.62, 1.35, 1.10, 0.88, 0.71, 0.59]
-    }
-    df_kinetics = pd.DataFrame(default_kinetics)
+    # कोडिंग स्ट्रक्चर को पूरी तरह बदल दिया गया है ताकि कोई सिंटैक्स एरर न आ सके
+    time_list = [0, 10, 20, 30, 40, 50, 60]
+    abs_list = [2.0, 1.62, 1.35, 1.10, 0.88, 0.71, 0.59]
+    
+    df_kinetics = pd.DataFrame({
+        "Time (seconds)": time_list,
+        "Absorbance (Raw)": abs_list
+    })
+    
     edited_kinetics = st.data_editor(df_kinetics, num_rows="dynamic", use_container_width=True)
     
     time = edited_kinetics.iloc[:, 0].values
