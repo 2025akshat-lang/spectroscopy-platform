@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Spectroscopy Analytics Platform", layout="wide")
-st.title(" Interactive Spectroscopy Data Analytics Platform")
+st.title("🔬 Interactive Spectroscopy Data Analytics Platform")
 st.write("Engineering Analytics and Predictive Modeling for Spectroscopic Lab Results")
 
-st.sidebar.header(" Project Modules")
+st.sidebar.header("📁 Project Modules")
 module = st.sidebar.selectbox(
     "Select Analytical Module",
     ["1. Concentration Analytics (Beer-Lambert)", "2. Reaction Kinetics (Rate Laws)", "3. Complex Composition & Spectra (Job's Method)"]
@@ -16,22 +16,18 @@ module = st.sidebar.selectbox(
 st.subheader(f"Current Dashboard: {module}")
 
 if "1. Concentration Analytics" in module:
-    st.info(" Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.")
+    st.info("💡 Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.")
     
-    st.markdown(" Input Lab Readings")
+    st.markdown("### ✍️ Input Lab Readings")
     st.write("Modify the values below to verify any custom or real lab data instantly:")
     
-    # Live editable data grid for Professor/User
     default_data = {
         "Concentration (M)": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
         "Absorbance": [0.0, 0.31, 0.58, 0.92, 1.21, 1.48]
     }
     df_input = pd.DataFrame(default_data)
-    
-    # This makes the table fully interactive on screen!
     edited_df = st.data_editor(df_input, num_rows="dynamic", use_container_width=True)
     
-    # Extract values safely
     conc = edited_df.iloc[:, 0].values
     absorbance = edited_df.iloc[:, 1].values
     
@@ -42,7 +38,6 @@ if "1. Concentration Analytics" in module:
             m, c = np.polyfit(conc, absorbance, 1)
             st.success(f"📈 Calibration Curve: **Absorbance = {m:.4f} * Conc + ({c:.4f})**")
             
-            # Interactive prediction for unknown sample
             st.markdown("#### 🎯 Verify Unknown Sample")
             unknown_abs = st.number_input("Enter Absorbance of Unknown Sample:", min_value=0.0, max_value=3.0, value=0.75, step=0.01)
             predicted_conc = (unknown_abs - c) / m
@@ -62,9 +57,9 @@ if "1. Concentration Analytics" in module:
 elif "2. Reaction Kinetics" in module:
     st.info("💡 Works for: Iodination of Acetone and Crystal Violet + NaOH Kinetics.")
     
-    # Editable data for Kinetics
+    # यहाँ पर एरर ठीक कर दिया गया है (Time की वैल्यू डाल दी गई है)
     default_kinetics = {
-        "Time (seconds)":,
+        "Time (seconds)": [0, 10, 20, 30, 40, 50, 60],
         "Absorbance (Raw)": [2.0, 1.62, 1.35, 1.10, 0.88, 0.71, 0.59]
     }
     df_kinetics = pd.DataFrame(default_kinetics)
@@ -73,7 +68,6 @@ elif "2. Reaction Kinetics" in module:
     time = edited_kinetics.iloc[:, 0].values
     abs_raw = edited_kinetics.iloc[:, 1].values
     
-    # Calculate simple rolling average to smooth
     df_calc = pd.DataFrame({"abs": abs_raw})
     abs_filtered = df_calc['abs'].rolling(window=3, min_periods=1, center=True).mean().values
     
@@ -81,7 +75,6 @@ elif "2. Reaction Kinetics" in module:
     with col1:
         st.write("### 📈 Kinetics Parameter Extraction")
         if len(time) > 1 and len(abs_raw) > 1:
-            # Avoid log of zero/negative
             safe_abs = np.where(abs_filtered > 0, abs_filtered, 0.001)
             ln_abs = np.log(safe_abs)
             k, c_k = np.polyfit(time, -ln_abs, 1)
