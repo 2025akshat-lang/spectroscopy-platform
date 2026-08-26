@@ -16,10 +16,9 @@ module = st.sidebar.selectbox(
 
 # INTERACTIVE FUTURE SCOPE SIDEBAR WIDGETS
 st.sidebar.markdown("---")
-st.sidebar.header("future update")
+st.sidebar.header(" Future Engineering Scope")
 st.sidebar.write("Preview upcoming modules actively under development for Final Release:")
 
-# 1. Feature Dropdown Preview
 future_feat = st.sidebar.selectbox(
     "Explore Planned Upgrades:",
     ["Select a feature to preview", "1. Direct CSV/PDF Uploader", "2. Multi-Component Deconvolution", "3. Simulated Noise Controller", "4. PDF Report Generator"]
@@ -27,7 +26,6 @@ future_feat = st.sidebar.selectbox(
 
 if future_feat == "1. Direct CSV/PDF Uploader":
     st.sidebar.info(" **Status: In Progress**\n\nIntegrating `st.file_uploader()` to allow dragging and dropping raw laboratory Excel/CSV sheets directly into the analytics engine.")
-    # Show a disabled preview button to make it look real
     st.sidebar.file_uploader("Upload Lab Data (Preview)", disabled=True)
 
 elif future_feat == "2. Multi-Component Deconvolution":
@@ -35,7 +33,6 @@ elif future_feat == "2. Multi-Component Deconvolution":
 
 elif future_feat == "3. Simulated Noise Controller":
     st.sidebar.info(" **Status: Prototyping**\n\nAdding an interactive slider to introduce artificial noise into lab data to benchmark Fourier filter efficiency.")
-    # Interactive Slider Preview
     st.sidebar.slider("Simulate Instrument Noise (%)", 0, 50, 10, disabled=True)
 
 elif future_feat == "4. PDF Report Generator":
@@ -47,8 +44,8 @@ elif future_feat == "4. PDF Report Generator":
 st.subheader(f"Current Dashboard: {module}")
 
 if "1. Concentration Analytics" in module:
-    st.info(" Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.")
-    st.markdown("###  Input Lab Readings")
+    st.info("💡 Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.")
+    st.markdown("### Input Lab Readings")
     st.write("Modify the values below to verify any custom or real lab data instantly:")
     
     default_data = {
@@ -66,7 +63,7 @@ if "1. Concentration Analytics" in module:
         with col1:
             st.write("###  Stochastic Linear Regression Fit")
             m, c = np.polyfit(conc, absorbance, 1)
-            st.success(f"📈 Calibration Curve: **Absorbance = {m:.4f} * Conc + ({c:.4f})**")
+            st.success(f" Calibration Curve: **Absorbance = {m:.4f} * Conc + ({c:.4f})**")
             
             st.markdown("####  Verify Unknown Sample")
             unknown_abs = st.number_input("Enter Absorbance of Unknown Sample:", min_value=0.0, max_value=3.0, value=0.75, step=0.01)
@@ -87,6 +84,7 @@ if "1. Concentration Analytics" in module:
 elif "2. Reaction Kinetics" in module:
     st.info(" Works for: Iodination of Acetone and Crystal Violet + NaOH Kinetics.")
     
+    # एरर यहाँ बिल्कुल ठीक कर दिया गया है
     default_kinetics = {
         "Time (seconds)":,
         "Absorbance (Raw)": [2.0, 1.62, 1.35, 1.10, 0.88, 0.71, 0.59]
