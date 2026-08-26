@@ -6,6 +6,15 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Spectroscopy Analytics Platform", layout="wide")
 st.title(" Spectroscopy Data Analytics Platform")
 st.write("Engineering Analytics and Predictive Modeling for Spectroscopic Lab Results")
+# DEVELOPER CREDIT BLOCK
+st.markdown("---")
+col_dev1, col_dev2 = st.columns([2, 1])
+with col_dev1:
+    st.markdown("👨‍💻 **Lead Platform Engineer:** Akshat Raj")
+with col_dev2:
+    # यहाँ अपने असली गिटहब का लिंक डाल दें
+    st.markdown("[🌐 View GitHub Profile](https://github.com)")
+st.markdown("---")
 
 # Sidebar Navigation
 st.sidebar.header(" Project Modules")
