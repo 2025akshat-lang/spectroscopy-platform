@@ -154,7 +154,7 @@ elif "3. Complex Composition" in module:
 
 # --- # --- SAFE FOOTER LAYER (WITHOUT OVERLAP) ---
 st.markdown("---")
-col_f1, col_f2 = st.columns([3, 1])
+col_f1, col_f2, col_f3 = st.columns([3, 1])
 with col_f1:
     st.markdown(" **Developed by Akshat Raj** | Spectroscopy Data Analytics Platform")
 with col_f2:
