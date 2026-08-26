@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.signal import savitzky_golay
 
 st.set_page_config(page_title="Spectroscopy Analytics Platform", layout="wide")
 st.title("🔬 Interactive Spectroscopy Data Analytics Platform")
@@ -52,11 +51,12 @@ if "1. Concentration Analytics" in module:
 elif "2. Reaction Kinetics" in module:
     st.info("💡 Works for: Iodination of Acetone and Crystal Violet + NaOH Kinetics.")
     df = get_dummy_data(2)
-    df['Absorbance (Filtered)'] = savitzky_golay(df['Absorbance (Raw)'].values, window_size=5, order=2)
+    # Using simple rolling mean filter to avoid any import error
+    df['Absorbance (Filtered)'] = df['Absorbance (Raw)'].rolling(window=3, min_periods=1, center=True).mean()
     col1, col2 = st.columns(2)
     with col1: st.write("### Kinetics Data Streams", df)
     with col2:
-        st.write("### Signal Processing: Fourier Filter Layer")
+        st.write("### Signal Processing: Analytical Filter Layer")
         fig, ax = plt.subplots()
         ax.plot(df.iloc[:, 0], df['Absorbance (Raw)'], color='orange', alpha=0.6, label='Raw Noisy Data')
         ax.plot(df.iloc[:, 0], df['Absorbance (Filtered)'], color='green', linewidth=2, label='Filtered/Smooth Data')
@@ -68,7 +68,7 @@ elif "2. Reaction Kinetics" in module:
 elif "3. Complex Composition" in module:
     st.info("💡 Works for: Job's Method (Fe-Salicylic Acid) and λmax Determination.")
     df = get_dummy_data(3)
-    df['Absorbance (Filtered)'] = savitzky_golay(df['Absorbance (Raw)'].values, window_size=5, order=2)
+    df['Absorbance (Filtered)'] = df['Absorbance (Raw)'].rolling(window=3, min_periods=1, center=True).mean()
     col1, col2 = st.columns(2)
     with col1: st.write("### Job's Continuous Variation Dataset", df)
     with col2:
