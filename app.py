@@ -152,31 +152,10 @@ elif "3. Complex Composition" in module:
         st.pyplot(fig)
 
 
-# --- PROFESSIONAL FOOTER LAYER ---
-st.markdown("<br><br>", unsafe_allow_html=True) # थोड़ा स्पेस देने के लिए
-
-footer_html = """
-<div style="
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #f1f3f6;
-    color: #333333;
-    text-align: center;
-    padding: 10px;
-    font-family: sans-serif;
-    font-size: 14px;
-    border-top: 1px solid #e0e0e0;
-    z-index: 999;
-">
-    🚀 Developed by <b>Akshat Raj</b> | 
-    <a href="https://github.com" target="_blank" style="color: #0366d6; text-decoration: none; font-weight: bold;">
-        🌐 GitHub Profile
-    </a>
-</div>
-"""
-st.markdown(footer_html, unsafe_allow_html=True)
-
-
-
+# --- # --- SAFE FOOTER LAYER (WITHOUT OVERLAP) ---
+st.markdown("---")
+col_f1, col_f2 = st.columns([3, 1])
+with col_f1:
+    st.markdown("🚀 **Developed by Akshat Raj** | Spectroscopy Data Analytics Platform")
+with col_f2:
+    st.markdown("[🌐 GitHub Profile](https://github.com)")
