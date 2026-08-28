@@ -82,6 +82,7 @@
 
         <section class="w-full flex-grow bg-white p-2 md:p-4 flex flex-col gap-6">
             
+            <!-- Module 1 -->
             <div id="view-module1" class="space-y-6">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Spectroscopy Data Analytics Platform</h2>
@@ -165,21 +166,51 @@
                 </div>
             </div>
 
+            <!-- Module 2: Reaction Kinetics with Expandable Time/Pencil Icon Feature -->
             <div id="view-module2" class="space-y-6 hidden">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Current Dashboard: 2. Reaction Kinetics</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-slate-900">Current Dashboard: 2. Reaction Kinetics</h2>
+                    
+                    <!-- Pencil Icon Trigger to Expand Duration -->
+                    <button id="expandKineticsBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded text-xs font-semibold text-slate-700 transition-colors shadow-sm" title="Expand Time Range">
+                        <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                        </svg>
+                        <span>Edit / Expand Time</span>
+                    </button>
+                </div>
+
+                <!-- Hidden expansion control panel that pops up on clicking the pencil icon -->
+                <div id="kineticsControlPanel" class="p-4 bg-slate-50 border border-slate-200 rounded-lg hidden space-y-3">
+                    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Configure Kinetics Duration & Rows</h3>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">Max Time (Seconds):</label>
+                            <input type="number" id="maxTimeInput" value="180" step="10" class="p-1.5 text-xs border border-slate-300 rounded bg-white w-28 text-center font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">Interval Step (Seconds):</label>
+                            <input type="number" id="timeIntervalInput" value="10" step="5" class="p-1.5 text-xs border border-slate-300 rounded bg-white w-28 text-center font-medium">
+                        </div>
+                        <div class="flex items-end h-full pt-5">
+                            <button type="button" id="applyKineticsExtension" class="px-4 py-1.5 bg-slate-900 text-white rounded text-xs font-medium hover:bg-slate-800 transition-colors shadow-sm">Generate Rows</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="space-y-4">
                         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Reaction Kinetics Data</h3>
-                        <div class="overflow-x-auto border border-slate-200 rounded">
+                        <div class="overflow-x-auto max-h-80 overflow-y-auto border border-slate-200 rounded">
                             <table class="w-full text-xs text-left text-slate-700">
-                                <thead class="bg-slate-100 text-slate-800 font-semibold uppercase">
+                                <thead class="bg-slate-100 text-slate-800 font-semibold uppercase sticky top-0">
                                     <tr><th class="p-2 border border-slate-200">Time (s)</th><th class="p-2 border border-slate-200">Absorbance</th></tr>
                                 </thead>
                                 <tbody id="mod2TableBody">
-                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="0" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="2.00" class="m2-a w-full p-1 text-center"></td></tr>
-                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="10" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.62" class="m2-a w-full p-1 text-center"></td></tr>
-                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="20" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.35" class="m2-a w-full p-1 text-center"></td></tr>
-                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="30" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.10" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="0" class="m2-t w-full p-1 text-center bg-slate-50"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="2.00" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="10" class="m2-t w-full p-1 text-center bg-slate-50"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.62" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="20" class="m2-t w-full p-1 text-center bg-slate-50"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.35" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="30" class="m2-t w-full p-1 text-center bg-slate-50"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.10" class="m2-a w-full p-1 text-center"></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -194,6 +225,7 @@
                 </div>
             </div>
 
+            <!-- Module 3 -->
             <div id="view-module3" class="space-y-6 hidden">
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Current Dashboard: 3. Job's Composition</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -282,6 +314,41 @@
                     toggleSidebar();
                 }
             });
+        });
+
+        // Pencil icon toggle for Kinetics expansion panel
+        const expandKineticsBtn = document.getElementById('expandKineticsBtn');
+        const kineticsControlPanel = document.getElementById('kineticsControlPanel');
+        expandKineticsBtn.addEventListener('click', () => {
+            kineticsControlPanel.classList.toggle('hidden');
+        });
+
+        // Apply custom time extension logic for Module 2
+        document.getElementById('applyKineticsExtension').addEventListener('click', () => {
+            let maxTime = parseInt(document.getElementById('maxTimeInput').value) || 180;
+            let interval = parseInt(document.getElementById('timeIntervalInput').value) || 10;
+            let tbody = document.getElementById('mod2TableBody');
+            
+            // Retain old values if possible, or generate mock decay curve values
+            tbody.innerHTML = '';
+            for (let t = 0; t <= maxTime; t += interval) {
+                // Generate a smooth simulated exponential decay absorbance based on time for convenience
+                let mockAbs = Math.max(0.05, 2.0 * Math.exp(-0.015 * t)).toFixed(2);
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="border border-slate-200 p-1"><input type="number" value="${t}" class="m2-t w-full p-1 text-center bg-slate-50"></td>
+                    <td class="border border-slate-200 p-1"><input type="number" step="0.01" value="${mockAbs}" class="m2-a w-full p-1 text-center"></td>
+                `;
+                tbody.appendChild(row);
+            }
+
+            // Re-bind input event listeners to newly generated inputs
+            document.querySelectorAll('.m2-t, .m2-a').forEach(input => {
+                input.addEventListener('input', updateCharts);
+            });
+
+            updateCharts();
+            kineticsControlPanel.classList.add('hidden');
         });
 
         const futureSelect = document.getElementById('futureSelect');
