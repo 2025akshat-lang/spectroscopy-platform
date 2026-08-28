@@ -3,86 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectroscopy Data Analytics Platform</title>
-    <!-- Tailwind CSS for modern responsive UI -->
+    <title>Spectroscopy Data Analytics & Research Platform</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for interactive plotting -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts for Academic/Research Feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- Header -->
-    <header class="bg-slate-900 border-b border-slate-800 p-4 shadow-md">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-            <h1 class="text-xl md:text-2xl font-bold tracking-wide text-cyan-400"> Spectroscopy Data Analytics Platform</h1>
-            <p class="text-xs text-slate-400">Engineering Analytics & Predictive Modeling</p>
+    <!-- Academic Research Header -->
+    <header class="bg-white border-b border-slate-300 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="bg-indigo-700 text-white text-xs px-2 py-0.5 rounded font-mono font-semibold">ACADEMIC V2.4</span>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight text-slate-900">Spectroscopy Data Analytics Platform</h1>
+                </div>
+                <p class="text-xs text-slate-500 mt-0.5">Advanced Engineering Analytics, Beer-Lambert Modeling & Kinetic Parameter Extraction</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <span class="text-xs text-slate-400 block">Principal Developer</span>
+                <span class="text-xs font-semibold text-indigo-700">Akshat Raj</span>
+            </div>
         </div>
     </header>
 
-    <!-- Main Container -->
+    <!-- Main Research Container -->
     <main class="max-w-7xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
         
-        <!-- Sidebar Navigation -->
-        <aside class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-4 shadow-lg h-fit">
-            <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider"> Project Modules</h2>
-            <select id="moduleSelect" class="bg-slate-950 border border-slate-700 text-slate-200 text-sm rounded-lg p-2.5 focus:ring-cyan-500 focus:border-cyan-500 w-full outline-none">
-                <option value="module1">1. Concentration Analytics (Beer-Lambert)</option>
-                <option value="module2">2. Reaction Kinetics (Rate Laws)</option>
-                <option value="module3">3. Complex Composition (Job's Method)</option>
-            </select>
+        <!-- Sidebar Controls -->
+        <aside class="lg:col-span-1 bg-white border border-slate-300 rounded-lg p-5 flex flex-col gap-5 shadow-sm h-fit">
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2"> Analytical Module</label>
+                <select id="moduleSelect" class="bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-md p-2.5 focus:ring-2 focus:ring-indigo-600 focus:outline-none w-full font-medium">
+                    <option value="module1">1. Concentration Analytics (Beer-Lambert)</option>
+                    <option value="module2">2. Reaction Kinetics (Rate Laws)</option>
+                    <option value="module3">3. Complex Composition (Job's Method)</option>
+                </select>
+            </div>
 
-            <hr class="border-slate-800 my-2">
+            <hr class="border-slate-200">
 
-            <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider"> Future Engineering Scope</h3>
-            <p class="text-xs text-slate-500">Preview upcoming modules:</p>
-            <select id="futureSelect" class="bg-slate-950 border border-slate-700 text-slate-400 text-xs rounded-lg p-2 outline-none">
-                <option value="">Select a feature preview...</option>
-                <option value="f1">1. Direct CSV/PDF Uploader</option>
-                <option value="f2">2. Multi-Component Deconvolution</option>
-                <option value="f3">3. Simulated Noise Controller</option>
-                <option value="f4">4. PDF Report Generator</option>
-            </select>
-            <div id="futureInfo" class="text-xs bg-slate-950 p-3 rounded-lg border border-slate-800 text-slate-400 hidden"></div>
+            <div>
+                <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1"> Research Scope & Roadmap</h3>
+                <p class="text-xs text-slate-400 mb-2">Preview upcoming experimental modules:</p>
+                <select id="futureSelect" class="bg-slate-50 border border-slate-300 text-slate-700 text-xs rounded-md p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none w-full">
+                    <option value="">Select feature preview...</option>
+                    <option value="f1">1. Direct CSV/PDF Uploader</option>
+                    <option value="f2">2. Multi-Component Deconvolution</option>
+                    <option value="f3">3. Simulated Noise Controller</option>
+                    <option value="f4">4. PDF Report Generator</option>
+                </select>
+                <div id="futureInfo" class="text-xs bg-indigo-50 border border-indigo-100 text-indigo-900 p-3 rounded-md mt-2 hidden"></div>
+            </div>
         </aside>
 
-        <!-- Dynamic Content Area -->
-        <section class="lg:col-span-3 bg-slate-900 border border-slate-800 rounded-xl p-4 md:p-6 shadow-lg flex flex-col gap-6">
-            <div>
-                <h2 id="currentDashboardTitle" class="text-lg font-bold text-cyan-300 mb-1">Current Dashboard: Concentration Analytics</h2>
-                <p id="dashboardInfo" class="text-xs text-slate-400 bg-slate-950 p-2.5 rounded-lg border border-slate-800">Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.</p>
+        <!-- Main Workspace Area -->
+        <section class="lg:col-span-3 bg-white border border-slate-300 rounded-lg p-5 md:p-7 shadow-sm flex flex-col gap-6">
+            <div class="border-b border-slate-200 pb-4">
+                <h2 id="currentDashboardTitle" class="text-lg font-bold text-slate-900 mb-1">Current Dashboard: Concentration Analytics (Beer-Lambert)</h2>
+                <p id="dashboardInfo" class="text-xs text-slate-600 bg-slate-50 border border-slate-200 p-3 rounded-md">Applicable Systems: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.</p>
             </div>
 
             <!-- MODULE 1 VIEW -->
             <div id="view-module1" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <h3 class="text-sm font-semibold text-slate-200"> Input Lab Readings</h3>
+                    <div class="space-y-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider"> Lab Readings Matrix</h3>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-xs text-left text-slate-300">
-                                <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800">
-                                    <tr><th class="p-2">Concentration (M)</th><th class="p-2">Absorbance</th></tr>
+                            <table class="w-full text-xs text-left text-slate-700">
+                                <thead class="bg-slate-200 text-slate-800 font-semibold uppercase">
+                                    <tr><th class="p-2 border border-slate-300">Concentration (M)</th><th class="p-2 border border-slate-300">Absorbance</th></tr>
                                 </thead>
-                                <tbody id="mod1TableBody">
-                                    <tr><td><input type="number" step="0.1" value="0.0" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.0" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.2" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.31" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.4" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.58" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.6" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.92" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.8" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="1.21" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="1.0" class="m1-c bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="1.48" class="m1-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
+                                <tbody id="mod1TableBody" class="bg-white">
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.0" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.0" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.2" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.31" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.4" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.58" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.6" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.92" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.8" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.21" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="1.0" class="m1-c w-full p-1 text-center focus:outline-indigo-600"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.48" class="m1-a w-full p-1 text-center focus:outline-indigo-600"></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-lg text-xs" id="m1Equation">Calibration Curve: calculating...</div>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-md text-xs font-medium" id="m1Equation">Calibration Curve: calculating...</div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">Verify Unknown Sample Absorbance:</label>
-                            <input type="number" id="unknownAbs" value="0.75" step="0.01" class="bg-slate-900 border border-slate-700 p-2 rounded w-full text-sm">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Unknown Sample Absorbance Verification:</label>
+                            <input type="number" id="unknownAbs" value="0.75" step="0.01" class="bg-white border border-slate-300 p-2 rounded-md w-full text-sm font-medium focus:ring-2 focus:ring-indigo-600 focus:outline-none">
                         </div>
-                        <div class="p-3 bg-cyan-950/40 border border-cyan-800/50 rounded-lg">
-                            <span class="text-xs text-slate-400">Calculated Concentration:</span>
-                            <div id="unknownResult" class="text-lg font-bold text-cyan-400">0.0000 M</div>
+                        <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-md">
+                            <span class="text-xs text-indigo-700 font-semibold block uppercase tracking-wider">Calculated Concentration</span>
+                            <div id="unknownResult" class="text-xl font-bold text-indigo-900 mono mt-0.5">0.0000 M</div>
                         </div>
                     </div>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-center">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-center justify-center">
                         <canvas id="chartModule1" class="max-h-72"></canvas>
                     </div>
                 </div>
@@ -91,30 +110,30 @@
             <!-- MODULE 2 VIEW -->
             <div id="view-module2" class="space-y-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <h3 class="text-sm font-semibold text-slate-200"> Kinetics Data Input</h3>
+                    <div class="space-y-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider"> Reaction Kinetics Data</h3>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-xs text-left text-slate-300">
-                                <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800">
-                                    <tr><th class="p-2">Time (s)</th><th class="p-2">Absorbance (Raw)</th></tr>
+                            <table class="w-full text-xs text-left text-slate-700">
+                                <thead class="bg-slate-200 text-slate-800 font-semibold uppercase">
+                                    <tr><th class="p-2 border border-slate-300">Time (s)</th><th class="p-2 border border-slate-300">Absorbance (Raw)</th></tr>
                                 </thead>
-                                <tbody id="mod2TableBody">
-                                    <tr><td><input type="number" value="0" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="2.00" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="10" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="1.62" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="20" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="1.35" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="30" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="1.10" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="40" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.88" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="50" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.71" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" value="60" class="m2-t bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.59" class="m2-a bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
+                                <tbody id="mod2TableBody" class="bg-white">
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="0" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="2.00" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="10" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.62" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="20" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.35" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="30" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="1.10" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="40" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.88" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="50" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.71" class="m2-a w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" value="60" class="m2-t w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.59" class="m2-a w-full p-1 text-center"></td></tr>
                                 </tbody>
                             </table>
                         </div>
                         <div id="m2Results" class="space-y-2 text-xs">
-                            <div class="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-lg" id="m2Rate">Rate Constant (k): ...</div>
-                            <div class="p-3 bg-cyan-950/40 border border-cyan-800/50 rounded-lg" id="m2Half">Half-life: ...</div>
+                            <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-md font-medium" id="m2Rate">Rate Constant (k): ...</div>
+                            <div class="p-3 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded-md font-medium" id="m2Half">Half-life: ...</div>
                         </div>
                     </div>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-center">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-center justify-center">
                         <canvas id="chartModule2" class="max-h-72"></canvas>
                     </div>
                 </div>
@@ -123,31 +142,31 @@
             <!-- MODULE 3 VIEW -->
             <div id="view-module3" class="space-y-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <h3 class="text-sm font-semibold text-slate-200"> Job's Method Data Input</h3>
+                    <div class="space-y-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider"> Job's Method Stoichiometry Data</h3>
                         <div class="overflow-x-auto max-h-48 overflow-y-auto">
-                            <table class="w-full text-xs text-left text-slate-300">
-                                <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 sticky top-0">
-                                    <tr><th class="p-2">Mole Fraction</th><th class="p-2">Absorbance</th></tr>
+                            <table class="w-full text-xs text-left text-slate-700">
+                                <thead class="bg-slate-200 text-slate-800 font-semibold uppercase sticky top-0">
+                                    <tr><th class="p-2 border border-slate-300">Mole Fraction</th><th class="p-2 border border-slate-300">Absorbance</th></tr>
                                 </thead>
-                                <tbody id="mod3TableBody">
-                                    <tr><td><input type="number" step="0.1" value="0.0" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.0" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.1" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.25" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.2" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.48" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.3" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.71" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.4" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.89" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.5" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.98" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.6" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.85" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.7" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.66" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.8" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.42" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="0.9" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.21" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
-                                    <tr><td><input type="number" step="0.1" value="1.0" class="m3-x bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td><td><input type="number" step="0.01" value="0.0" class="m3-y bg-slate-900 border border-slate-700 p-1 w-full rounded text-center"></td></tr>
+                                <tbody id="mod3TableBody" class="bg-white">
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.0" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.0" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.1" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.25" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.2" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.48" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.3" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.71" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.4" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.89" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.5" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.98" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.6" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.85" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.7" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.66" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.8" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.42" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="0.9" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.21" class="m3-y w-full p-1 text-center"></td></tr>
+                                    <tr><td class="border border-slate-200 p-1"><input type="number" step="0.1" value="1.0" class="m3-x w-full p-1 text-center"></td><td class="border border-slate-200 p-1"><input type="number" step="0.01" value="0.0" class="m3-y w-full p-1 text-center"></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-lg text-xs" id="m3Peak">Peak Detected Apex at: ...</div>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-md text-xs font-medium" id="m3Peak">Peak Detected Apex at: ...</div>
                     </div>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-center">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-center justify-center">
                         <canvas id="chartModule3" class="max-h-72"></canvas>
                     </div>
                 </div>
@@ -157,19 +176,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 p-4 text-xs text-slate-400 mt-6">
+    <footer class="bg-white border-t border-slate-300 py-4 px-6 text-xs text-slate-500 mt-6">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div><strong>Developed by Akshat Raj</strong> | Spectroscopy Data Analytics Platform</div>
+            <div><strong>Spectroscopy Research Platform</strong> | Developed by Akshat Raj</div>
             <div class="flex gap-4">
-                <a href="https://github.com/2025akshat-lang" target="_blank" class="hover:text-cyan-400"> GitHub Profile</a>
-                <a href="https://sites.google.com/view/akshat-raj-e-portfolio/home" target="_blank" class="hover:text-cyan-400"> E-Portfolio</a>
+                <a href="https://github.com/2025akshat-lang" target="_blank" class="hover:text-indigo-600 transition-colors"> GitHub Profile</a>
+                <a href="https://sites.google.com/view/akshat-raj-e-portfolio/home" target="_blank" class="hover:text-indigo-600 transition-colors"> E-Portfolio</a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Execution Logic -->
     <script>
-        // Module Switching Logic
         const moduleSelect = document.getElementById('moduleSelect');
         const titleEl = document.getElementById('currentDashboardTitle');
         const infoEl = document.getElementById('dashboardInfo');
@@ -181,9 +199,9 @@
         };
 
         const infoTexts = {
-            'module1': "Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.",
-            'module2': "💡 Works for: Iodination of Acetone and Crystal Violet + NaOH Kinetics.",
-            'module3': "Works for: Job's Method (Fe-Salicylic Acid) and λmax Determination."
+            'module1': "Applicable Systems: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.",
+            'module2': "Applicable Kinetics: Iodination of Acetone and Crystal Violet + NaOH Systems.",
+            'module3': "Applicable Methods: Job's Continuous Variation Method (Fe-Salicylic Acid) & Stoichiometry Determination."
         };
 
         const titles = {
@@ -201,14 +219,13 @@
             updateCharts();
         });
 
-        // Future Feature Preview Logic
         const futureSelect = document.getElementById('futureSelect');
         const futureInfo = document.getElementById('futureInfo');
         const futureData = {
-            'f1': " <strong>Status: In Progress</strong><br>Integrating file parser to allow dragging raw laboratory Excel/CSV sheets.",
-            'f2': " <strong>Status: Mathematical Modeling</strong><br>Implementing matrix inversion algorithms to separate overlapping peaks.",
-            'f3': " <strong>Status: Prototyping</strong><br>Adding interactive controls to introduce artificial noise into lab data.",
-            'f4': " <strong>Status: UI Design</strong><br>Developing single-click system to export publication-ready charts into PDF."
+            'f1': " <strong>Status: In Progress</strong><br>Integrating file parser to parse raw laboratory CSV/Excel spreadsheets.",
+            'f2': " <strong>Status: Mathematical Modeling</strong><br>Implementing matrix inversion algorithms for multi-peak component deconvolution.",
+            'f3': " <strong>Status: Prototyping</strong><br>Adding simulated Gaussian noise controls to benchmark filter efficiency.",
+            'f4': " <strong>Status: UI Design</strong><br>Single-click publication-ready research report export engine."
         };
 
         futureSelect.addEventListener('change', (e) => {
@@ -221,10 +238,8 @@
             }
         });
 
-        // Chart.js Instances
         let chart1, chart2, chart3;
 
-        // Linear Regression Helper
         function linearRegression(x, y) {
             let n = x.length;
             let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
@@ -239,7 +254,6 @@
             return { m, c };
         }
 
-        // Update Module 1
         function updateModule1() {
             let cInputs = document.querySelectorAll('.m1-c');
             let aInputs = document.querySelectorAll('.m1-a');
@@ -252,7 +266,7 @@
 
             if(x.length > 1) {
                 let fit = linearRegression(x, y);
-                document.getElementById('m1Equation').innerHTML = `Calibration Curve: <strong>Absorbance = ${fit.m.toFixed(4)} * Conc + (${fit.c.toFixed(4)})</strong>`;
+                document.getElementById('m1Equation').innerHTML = `Calibration Curve Fit: <strong>Absorbance = ${fit.m.toFixed(4)} × Conc + (${fit.c.toFixed(4)})</strong>`;
                 
                 let unknownAbs = parseFloat(document.getElementById('unknownAbs').value) || 0;
                 let predConc = (unknownAbs - fit.c) / fit.m;
@@ -266,16 +280,15 @@
                     type: 'scatter',
                     data: {
                         datasets: [
-                            { label: 'Lab Readings', data: x.map((v, i) => ({x: v, y: y[i]})), backgroundColor: 'red', pointRadius: 6 },
-                            { label: 'Fit Line', data: x.map((v, i) => ({x: v, y: fitLine[i]})), type: 'line', borderColor: 'blue', borderDash: [5,5], borderWidth: 2, pointRadius: 0 }
+                            { label: 'Observed Data', data: x.map((v, i) => ({x: v, y: y[i]})), backgroundColor: '#4f46e5', pointRadius: 5 },
+                            { label: 'Linear Fit (y=mx+c)', data: x.map((v, i) => ({x: v, y: fitLine[i]})), type: 'line', borderColor: '#0ea5e9', borderDash: [4,4], borderWidth: 2, pointRadius: 0 }
                         ]
                     },
-                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Concentration (M)', color: '#ccc'} }, y: { title: {display: true, text: 'Absorbance', color: '#ccc'} } }, plugins: { legend: { labels: { color: '#ccc' } } } }
+                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Concentration (M)', color: '#334155'} }, y: { title: {display: true, text: 'Absorbance', color: '#334155'} } }, plugins: { legend: { labels: { color: '#334155', font: {family: 'Inter'} } } } }
                 });
             }
         }
 
-        // Update Module 2
         function updateModule2() {
             let tInputs = document.querySelectorAll('.m2-t');
             let aInputs = document.querySelectorAll('.m2-a');
@@ -287,7 +300,6 @@
             }
 
             if(time.length > 1) {
-                // Simple rolling mean filter (window 3)
                 let absFiltered = absRaw.map((val, idx, arr) => {
                     let start = Math.max(0, idx - 1);
                     let end = Math.min(arr.length, idx + 2);
@@ -303,7 +315,7 @@
                 let k = fit.m;
                 let halfLife = k > 0 ? 0.693 / k : 0;
 
-                document.getElementById('m2Rate').innerHTML = `Rate Constant (k): <strong>${k.toFixed(4)} s⁻¹</strong>`;
+                document.getElementById('m2Rate').innerHTML = `Extracted Rate Constant (k): <strong>${k.toFixed(4)} s⁻¹</strong>`;
                 document.getElementById('m2Half').innerHTML = `Calculated Half-life (t₁/₂): <strong>${halfLife.toFixed(2)} seconds</strong>`;
 
                 if(chart2) chart2.destroy();
@@ -313,16 +325,15 @@
                     data: {
                         labels: time,
                         datasets: [
-                            { label: 'Raw Noisy Data', data: absRaw, borderColor: 'orange', backgroundColor: 'orange', pointRadius: 4, tension: 0.1 },
-                            { label: 'Filtered Data Layer', data: absFiltered, borderColor: 'green', backgroundColor: 'green', borderWidth: 2, pointRadius: 4, tension: 0.1 }
+                            { label: 'Raw Kinetics', data: absRaw, borderColor: '#f59e0b', backgroundColor: '#f59e0b', pointRadius: 4, tension: 0.1 },
+                            { label: 'Smoothed Layer', data: absFiltered, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 2, pointRadius: 4, tension: 0.1 }
                         ]
                     },
-                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Time (seconds)', color: '#ccc'} }, y: { title: {display: true, text: 'Absorbance', color: '#ccc'} } }, plugins: { legend: { labels: { color: '#ccc' } } } }
+                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Time (seconds)', color: '#334155'} }, y: { title: {display: true, text: 'Absorbance', color: '#334155'} } }, plugins: { legend: { labels: { color: '#334155', font: {family: 'Inter'} } } } }
                 });
             }
         }
 
-        // Update Module 3
         function updateModule3() {
             let xInputs = document.querySelectorAll('.m3-x');
             let yInputs = document.querySelectorAll('.m3-y');
@@ -340,7 +351,7 @@
                     if(yVal[i] > maxVal) { maxVal = yVal[i]; maxIdx = i; }
                 }
                 let optimalVal = xVal[maxIdx];
-                document.getElementById('m3Peak').innerHTML = `Peak Detected Apex at: <strong>${optimalVal.toFixed(2)}</strong>`;
+                document.getElementById('m3Peak').innerHTML = `Stoichiometric Peak Apex Detected at Mole Fraction: <strong>${optimalVal.toFixed(2)}</strong>`;
 
                 if(chart3) chart3.destroy();
                 const ctx = document.getElementById('chartModule3').getContext('2d');
@@ -349,10 +360,10 @@
                     data: {
                         labels: xVal,
                         datasets: [
-                            { label: 'Analytical Baseline / Lab Points', data: yVal, borderColor: 'magenta', backgroundColor: 'purple', pointRadius: 6, fill: false, tension: 0.2 }
+                            { label: 'Job Plot Profile', data: yVal, borderColor: '#8b5cf6', backgroundColor: '#c084fc', pointRadius: 5, fill: false, tension: 0.2 }
                         ]
                     },
-                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Mole Fraction', color: '#ccc'} }, y: { title: {display: true, text: 'Absorbance', color: '#ccc'} } }, plugins: { legend: { labels: { color: '#ccc' } } } }
+                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Mole Fraction', color: '#334155'} }, y: { title: {display: true, text: 'Absorbance', color: '#334155'} } }, plugins: { legend: { labels: { color: '#334155', font: {family: 'Inter'} } } } }
                 });
             }
         }
@@ -363,12 +374,10 @@
             updateModule3();
         }
 
-        // Event Listeners for inputs changing
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', updateCharts);
         });
 
-        // Initial Load
         window.onload = updateCharts;
     </script>
 </body>
