@@ -407,6 +407,161 @@
                         legend: { 
                             position: 'top',
                             labels: { color: '#1e293b', font: {family: 'Inter', size: 12}, boxWidth: 15 } 
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const backdrop = document.getElementById('backdrop');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            backdrop.classList.toggle('hidden');
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+        backdrop.addEventListener('click', toggleSidebar);
+
+        function adjustAbs(val) {
+            let input = document.getElementById('unknownAbs');
+            let current = parseFloat(input.value) || 0;
+            input.value = Math.max(0, (current + val)).toFixed(2);
+            updateModule1();
+        }
+
+        const menuButtons = document.querySelectorAll('.menu-btn');
+        const views = {
+            'module1': document.getElementById('view-module1'),
+            'module2': document.getElementById('view-module2'),
+            'module3': document.getElementById('view-module3')
+        };
+
+        menuButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
+                
+                menuButtons.forEach(b => {
+                    b.className = "menu-btn w-full text-left px-3 py-2 rounded text-xs font-medium text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-between";
+                    b.querySelector('span:last-child').className = "text-[10px] text-slate-400";
+                });
+                btn.className = "menu-btn w-full text-left px-3 py-2 rounded text-xs font-medium bg-slate-200 text-slate-900 transition-all flex items-center justify-between";
+                btn.querySelector('span:last-child').className = "text-[10px]";
+
+                Object.keys(views).forEach(k => views[k].classList.add('hidden'));
+                views[target].classList.remove('hidden');
+                updateCharts();
+
+                if (window.innerWidth < 1024 && sidebar.classList.contains('open')) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        const futureSelect = document.getElementById('futureSelect');
+        const futureInfo = document.getElementById('futureInfo');
+        const futureData = {
+            'f1': "<strong>Status: In Progress</strong><br>Integrating parser for CSV/Excel spreadsheets.",
+            'f2': "<strong>Status: Mathematical Modeling</strong><br>Matrix inversion algorithms for multi-peak deconvolution.",
+            'f3': "<strong>Status: Prototyping</strong><br>Simulated Gaussian noise controls.",
+            'f4': "<strong>Status: UI Design</strong><br>Single-click publication-ready PDF report generator."
+        };
+
+        futureSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if(val && futureData[val]) {
+                futureInfo.innerHTML = futureData[val];
+                futureInfo.classList.remove('hidden');
+            } else {
+                futureInfo.classList.add('hidden');
+            }
+        });
+
+        let chart1, chart2, chart3;
+
+        function linearRegression(x, y) {
+            let n = x.length;
+            let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+            for (let i = 0; i < n; i++) {
+                sumX += x[i];
+                sumY += y[i];
+                sumXY += x[i] * y[i];
+                sumXX += x[i] * x[i];
+            }
+            let denom = (n * sumXX - sumX * sumX);
+            let m = denom === 0 ? 0 : (n * sumXY - sumX * sumY) / denom;
+            let c = (sumY - m * sumX) / n;
+            return { m, c };
+        }
+
+        function updateModule1() {
+            let concInputs = document.querySelectorAll('.conc-input');
+            let absInputs = document.querySelectorAll('.abs-input');
+            let x = [], y = [];
+            
+            for(let i=0; i<concInputs.length; i++) {
+                let xv = parseFloat(concInputs[i].value);
+                let yv = parseFloat(absInputs[i].value);
+                if(!isNaN(xv) && !isNaN(yv)) {
+                    x.push(xv);
+                    y.push(yv);
+                }
+            }
+
+            if(x.length < 2) return;
+
+            let fit = linearRegression(x, y);
+            
+            document.getElementById('regressionBox').innerHTML = 
+                `Calibration Curve: Absorbance = ${fit.m.toFixed(4)} * Conc + (${fit.c.toFixed(4)})`;
+
+            let unknownAbs = parseFloat(document.getElementById('unknownAbs').value) || 0;
+            let predConc = fit.m !== 0 ? (unknownAbs - fit.c) / fit.m : 0;
+            document.getElementById('unknownResult').innerText = `${predConc.toFixed(4)} M`;
+
+            let fitLine = x.map(val => fit.m * val + fit.c);
+
+            if(chart1) chart1.destroy();
+            const ctx = document.getElementById('chartModule1').getContext('2d');
+            chart1 = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { 
+                            label: 'Lab Readings', 
+                            data: x.map((v, i) => ({x: v, y: y[i]})), 
+                            backgroundColor: '#dc2626', 
+                            pointRadius: 6,
+                            pointHoverRadius: 8
+                        },
+                        { 
+                            label: 'Fit Line (y=mx+c)', 
+                            data: x.map((v, i) => ({x: v, y: fitLine[i]})), 
+                            type: 'line', 
+                            borderColor: '#1e3a8a', 
+                            borderDash: [5, 5], 
+                            borderWidth: 2, 
+                            pointRadius: 0,
+                            tension: 0 
+                        }
+                    ]
+                },
+                options: { 
+                    responsive: true, 
+                    animation: false,
+                    scales: { 
+                        x: { 
+                            title: {display: true, text: 'Concentration (M)', color: '#334155', font: {weight: '500'}},
+                            grid: {color: '#f1f5f9'}
+                        }, 
+                        y: { 
+                            title: {display: true, text: 'Absorbance', color: '#334155', font: {weight: '500'}},
+                            grid: {color: '#f1f5f9'}
+                        } 
+                    }, 
+                    plugins: { 
+                        legend: { 
+                            position: 'top',
+                            labels: { color: '#1e293b', font: {family: 'Inter', size: 12}, boxWidth: 15 } 
                         } 
                     } 
                 }
@@ -438,7 +593,14 @@
                             { label: 'Kinetics Curve', data: absRaw, borderColor: '#2563eb', backgroundColor: '#2563eb', borderWidth: 2, pointRadius: 4, tension: 0.1 }
                         ]
                     },
-                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Time (s)'} }, y: { title: {display: true, text: 'Absorbance'} } } }
+                    options: { 
+                        responsive: true, 
+                        animation: false,
+                        scales: { 
+                            x: { title: {display: true, text: 'Time (s)'} }, 
+                            y: { title: {display: true, text: 'Absorbance'} } 
+                        } 
+                    }
                 });
             }
         }
@@ -470,7 +632,14 @@
                             { label: "Job's Plot", data: yVal, borderColor: '#dc2626', backgroundColor: '#dc2626', borderWidth: 2, pointRadius: 5, tension: 0.2 }
                         ]
                     },
-                    options: { responsive: true, scales: { x: { title: {display: true, text: 'Mole Fraction'} }, y: { title: {display: true, text: 'Absorbance'} } } }
+                    options: { 
+                        responsive: true, 
+                        animation: false,
+                        scales: { 
+                            x: { title: {display: true, text: 'Mole Fraction'} }, 
+                            y: { title: {display: true, text: 'Absorbance'} } 
+                        } 
+                    }
                 });
             }
         }
@@ -487,5 +656,6 @@
 
         window.onload = updateCharts;
     </script>
+
 </body>
 </html>
