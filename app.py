@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg') # Ye headless server pe plots break hone se bachayega
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Spectroscopy Analytics Platform", layout="wide")
 st.title(" Spectroscopy Data Analytics Platform")
