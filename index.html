@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectroscopy Data Analytics Platform</title>
+    <title>Spectroscopy Data Analytics & Research Platform</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -13,7 +13,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
-        /* Smooth Slide-in Drawer Transition */
         #sidebar {
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -32,7 +31,6 @@
     <header class="bg-white border-b border-slate-200 z-20 sticky top-0">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <!-- Sidebar Toggle Button -->
                 <button id="sidebarToggle" class="p-1.5 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm" title="Toggle Sidebar">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -49,7 +47,7 @@
     <!-- Main App Layout -->
     <div class="max-w-7xl mx-auto w-full p-4 md:p-6 flex flex-col lg:flex-row gap-6 flex-grow items-start relative">
         
-        <!-- SIDEBAR MENU SECTION (Streamlit Drawer) -->
+        <!-- SIDEBAR MENU SECTION -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 w-80 max-w-full bg-slate-50 border-r border-slate-200 p-5 shadow-xl flex flex-col gap-5 z-40 lg:relative lg:inset-auto lg:shadow-none lg:rounded-lg lg:border">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Navigation Menu</span>
@@ -60,7 +58,7 @@
                 <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Project Modules</h2>
                 <nav class="space-y-1.5" id="menuList">
                     <button data-target="module1" class="menu-btn w-full text-left px-3 py-2 rounded text-xs font-medium bg-slate-200 text-slate-900 transition-all flex items-center justify-between">
-                        <span>1. Beer-Lambert Analytics</span>
+                        <span>1. Concentration Analytics (Beer-Lambert)</span>
                         <span class="text-[10px]">▶</span>
                     </button>
                     <button data-target="module2" class="menu-btn w-full text-left px-3 py-2 rounded text-xs font-medium text-slate-600 hover:bg-slate-100 transition-all flex items-center justify-between">
@@ -78,7 +76,6 @@
 
             <div>
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Future Engineering Scope</h3>
-                <p class="text-xs text-slate-500 mb-2">Preview upcoming modules:</p>
                 <select id="futureSelect" class="bg-white border border-slate-300 text-slate-700 text-xs rounded p-2 focus:outline-none w-full">
                     <option value="">Select feature preview...</option>
                     <option value="f1">1. Direct CSV/PDF Uploader</option>
@@ -92,21 +89,84 @@
 
         <!-- RIGHT SIDE DYNAMIC CONTENT AREA -->
         <section class="w-full flex-grow bg-white p-2 md:p-4 flex flex-col gap-6">
-            <div class="border-b border-slate-200 pb-4">
-                <h2 id="currentDashboardTitle" class="text-lg md:text-xl font-bold text-slate-900 mb-1">Verify Unknown Sample</h2>
-                <p id="dashboardInfo" class="text-xs text-slate-500">Enter Absorbance of Unknown Sample:</p>
-            </div>
-
+            
             <!-- MODULE 1 VIEW -->
             <div id="view-module1" class="space-y-6">
-                <div class="max-w-md space-y-4">
-                    <div>
-                        <div class="flex items-center border border-slate-300 rounded bg-slate-50 overflow-hidden">
-                            <input type="number" id="unknownAbs" value="0.81" step="0.01" class="bg-transparent p-2.5 w-full text-sm font-medium focus:outline-none px-3">
-                            <button type="button" onclick="adjustAbs(-0.01)" class="px-3 py-2 border-l border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">−</button>
-                            <button type="button" onclick="adjustAbs(0.01)" class="px-3 py-2 border-l border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">+</button>
-                        </div>
+                <!-- Title & Context -->
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Spectroscopy Data Analytics Platform</h2>
+                    <p class="text-sm text-slate-600 mb-4">Engineering Analytics and Predictive Modeling for Spectroscopic Lab Results</p>
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900">
+                        Works for: CuSO4, KMnO4, K2Cr2O7, Fe2+-Phenanthroline, and Ni-DMG extraction experiments.
                     </div>
+                </div>
+
+                <div class="border-t border-slate-200 pt-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Current Dashboard: 1. Concentration Analytics (Beer-Lambert)</h3>
+                </div>
+
+                <!-- Input Lab Readings Table Section -->
+                <div class="space-y-3">
+                    <h4 class="text-base font-bold text-slate-900">Input Lab Readings</h4>
+                    <p class="text-xs text-slate-500">Modify the values below to verify any custom or real lab data instantly:</p>
+                    
+                    <div class="overflow-x-auto border border-slate-200 rounded">
+                        <table class="w-full text-xs text-left text-slate-700" id="labTable">
+                            <thead class="bg-slate-100 text-slate-800 font-semibold uppercase">
+                                <tr>
+                                    <th class="p-2 border-b border-slate-200 w-1/2">Concentration (M)</th>
+                                    <th class="p-2 border-b border-slate-200 w-1/2">Absorbance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.1" value="0.0" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.01" value="0.00" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.1" value="0.2" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.01" value="0.31" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.1" value="0.4" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.01" value="0.58" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.1" value="0.6" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.01" value="0.92" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.1" value="0.8" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1 border-b border-slate-200"><input type="number" step="0.01" value="1.21" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1"><input type="number" step="0.1" value="1.0" class="conc-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                    <td class="p-1"><input type="number" step="0.01" value="1.48" class="abs-input w-full p-2 bg-slate-50 rounded border border-slate-200 text-center font-medium"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Stochastic Linear Regression Fit Section -->
+                <div class="space-y-3 pt-2">
+                    <h4 class="text-lg font-bold text-slate-900">Stochastic Linear Regression Fit</h4>
+                    <div id="regressionBox" class="p-3 bg-emerald-50 border border-emerald-200 rounded text-xs font-semibold text-emerald-900">
+                        Calibration Curve: Absorbance = 1.4914 * Conc + (0.0043)
+                    </div>
+                </div>
+
+                <!-- Verify Unknown Sample Section -->
+                <div class="space-y-4 pt-2">
+                    <h4 class="text-lg font-bold text-slate-900">Verify Unknown Sample</h4>
+                    <label class="block text-xs text-slate-600">Enter Absorbance of Unknown Sample:</label>
+                    
+                    <div class="max-w-md flex items-center border border-slate-300 rounded bg-slate-50 overflow-hidden shadow-sm">
+                        <input type="number" id="unknownAbs" value="0.81" step="0.01" class="bg-transparent p-2.5 w-full text-sm font-medium focus:outline-none px-3">
+                        <button type="button" onclick="adjustAbs(-0.01)" class="px-3 py-2 border-l border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">−</button>
+                        <button type="button" onclick="adjustAbs(0.01)" class="px-3 py-2 border-l border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">+</button>
+                    </div>
+
                     <div>
                         <span class="text-xs text-slate-500 block">Calculated Concentration</span>
                         <div id="unknownResult" class="text-3xl font-bold text-slate-900 mono mt-1">0.5402 M</div>
@@ -114,18 +174,19 @@
                 </div>
 
                 <!-- Clean Streamlit Style Chart Container -->
-                <div class="mt-8 bg-white border border-slate-200 rounded p-4 max-w-2xl">
+                <div class="mt-6 bg-white border border-slate-200 rounded-lg p-4 max-w-2xl shadow-sm">
                     <canvas id="chartModule1" class="w-full h-80"></canvas>
                 </div>
             </div>
 
             <!-- MODULE 2 VIEW -->
             <div id="view-module2" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Current Dashboard: 2. Reaction Kinetics</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="space-y-4">
                         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Reaction Kinetics Data</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-xs text-left text-slate-700 border border-slate-200">
+                        <div class="overflow-x-auto border border-slate-200 rounded">
+                            <table class="w-full text-xs text-left text-slate-700">
                                 <thead class="bg-slate-100 text-slate-800 font-semibold uppercase">
                                     <tr><th class="p-2 border border-slate-200">Time (s)</th><th class="p-2 border border-slate-200">Absorbance</th></tr>
                                 </thead>
@@ -137,7 +198,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="m2Results" class="text-xs text-slate-700 space-y-1">
+                        <div id="m2Results" class="text-xs text-slate-700 space-y-1 p-3 bg-slate-50 rounded border border-slate-200">
                             <div id="m2Rate">Rate Constant (k): ...</div>
                             <div id="m2Half">Half-life: ...</div>
                         </div>
@@ -150,10 +211,11 @@
 
             <!-- MODULE 3 VIEW -->
             <div id="view-module3" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Current Dashboard: 3. Job's Composition</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="space-y-4">
                         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Job's Method Stoichiometry Data</h3>
-                        <div class="overflow-x-auto max-h-48 overflow-y-auto border border-slate-200">
+                        <div class="overflow-x-auto max-h-48 overflow-y-auto border border-slate-200 rounded">
                             <table class="w-full text-xs text-left text-slate-700">
                                 <thead class="bg-slate-100 text-slate-800 font-semibold uppercase sticky top-0">
                                     <tr><th class="p-2 border border-slate-200">Mole Fraction</th><th class="p-2 border border-slate-200">Absorbance</th></tr>
@@ -167,7 +229,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="text-xs text-slate-700" id="m3Peak">Peak Detected Apex at: ...</div>
+                        <div class="text-xs text-slate-700 p-3 bg-slate-50 rounded border border-slate-200" id="m3Peak">Peak Detected Apex at: ...</div>
                     </div>
                     <div class="bg-white border border-slate-200 rounded p-4 flex items-center justify-center">
                         <canvas id="chartModule3" class="w-full h-72"></canvas>
@@ -189,7 +251,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logic & Clean Chart Styling -->
+    <!-- JavaScript Logic -->
     <script>
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
@@ -213,25 +275,10 @@
         }
 
         const menuButtons = document.querySelectorAll('.menu-btn');
-        const titleEl = document.getElementById('currentDashboardTitle');
-        const infoEl = document.getElementById('dashboardInfo');
-        
         const views = {
             'module1': document.getElementById('view-module1'),
             'module2': document.getElementById('view-module2'),
             'module3': document.getElementById('view-module3')
-        };
-
-        const titles = {
-            'module1': "Verify Unknown Sample",
-            'module2': "Current Dashboard: Reaction Kinetics (Rate Laws)",
-            'module3': "Current Dashboard: Complex Composition & Spectra (Job's Method)"
-        };
-
-        const subtitles = {
-            'module1': "Enter Absorbance of Unknown Sample:",
-            'module2': "Applicable Kinetics: Iodination of Acetone and Crystal Violet Systems.",
-            'module3': "Applicable Methods: Job's Continuous Variation Method."
         };
 
         menuButtons.forEach(btn => {
@@ -247,8 +294,6 @@
 
                 Object.keys(views).forEach(k => views[k].classList.add('hidden'));
                 views[target].classList.remove('hidden');
-                titleEl.innerText = titles[target];
-                infoEl.innerText = subtitles[target];
                 updateCharts();
 
                 if (window.innerWidth < 1024 && sidebar.classList.contains('open')) {
@@ -260,7 +305,7 @@
         const futureSelect = document.getElementById('futureSelect');
         const futureInfo = document.getElementById('futureInfo');
         const futureData = {
-            'f1': "<strong>Status: In Progress</strong><br>Integrating file parser for raw CSV/Excel spreadsheets.",
+            'f1': "<strong>Status: In Progress</strong><br>Integrating parser for CSV/Excel spreadsheets.",
             'f2': "<strong>Status: Mathematical Modeling</strong><br>Matrix inversion algorithms for multi-peak deconvolution.",
             'f3': "<strong>Status: Prototyping</strong><br>Simulated Gaussian noise controls.",
             'f4': "<strong>Status: UI Design</strong><br>Single-click publication-ready PDF report generator."
@@ -287,19 +332,36 @@
                 sumXY += x[i] * y[i];
                 sumXX += x[i] * x[i];
             }
-            let m = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            let denom = (n * sumXX - sumX * sumX);
+            let m = denom === 0 ? 0 : (n * sumXY - sumX * sumY) / denom;
             let c = (sumY - m * sumX) / n;
             return { m, c };
         }
 
         function updateModule1() {
-            // Fixed sample points matching Streamlit look
-            let x = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0];
-            let y = [0.0, 0.31, 0.58, 0.92, 1.21, 1.48];
+            let concInputs = document.querySelectorAll('.conc-input');
+            let absInputs = document.querySelectorAll('.abs-input');
+            let x = [], y = [];
+            
+            for(let i=0; i<concInputs.length; i++) {
+                let xv = parseFloat(concInputs[i].value);
+                let yv = parseFloat(absInputs[i].value);
+                if(!isNaN(xv) && !isNaN(yv)) {
+                    x.push(xv);
+                    y.push(yv);
+                }
+            }
+
+            if(x.length < 2) return;
 
             let fit = linearRegression(x, y);
+            
+            // Update Stochastic Regression Box text
+            document.getElementById('regressionBox').innerHTML = 
+                `Calibration Curve: Absorbance = ${fit.m.toFixed(4)} * Conc + (${fit.c.toFixed(4)})`;
+
             let unknownAbs = parseFloat(document.getElementById('unknownAbs').value) || 0;
-            let predConc = (unknownAbs - fit.c) / fit.m;
+            let predConc = fit.m !== 0 ? (unknownAbs - fit.c) / fit.m : 0;
             document.getElementById('unknownResult').innerText = `${predConc.toFixed(4)} M`;
 
             let fitLine = x.map(val => fit.m * val + fit.c);
@@ -364,7 +426,7 @@
             if(time.length > 1) {
                 let fit = linearRegression(time, absRaw);
                 document.getElementById('m2Rate').innerText = `Rate Constant (k): ${Math.abs(fit.m).toFixed(4)} s⁻¹`;
-                document.getElementById('m2Half').innerText = `Half-life: ${(0.693 / Math.abs(fit.m)).toFixed(2)} s`;
+                document.getElementById('m2Half').innerText = `Half-life: ${(0.693 / (Math.abs(fit.m) || 1)).toFixed(2)} s`;
 
                 if(chart2) chart2.destroy();
                 const ctx = document.getElementById('chartModule2').getContext('2d');
