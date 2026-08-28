@@ -82,7 +82,6 @@
 
         <section class="w-full flex-grow bg-white p-2 md:p-4 flex flex-col gap-6">
             
-            <!-- Module 1 -->
             <div id="view-module1" class="space-y-6">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Spectroscopy Data Analytics Platform</h2>
@@ -145,6 +144,15 @@
                     </div>
                 </div>
 
+                <div class="space-y-2 pt-2">
+                    <h4 class="text-sm font-bold text-slate-800">Step-by-Step Calculation Steps</h4>
+                    <div id="m1Steps" class="p-4 bg-slate-50 border border-slate-200 rounded text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <div><strong>Step 1:</strong> Collecting Concentration (x) and Absorbance (y) pairs.</div>
+                        <div><strong>Step 2:</strong> Calculating Least-Squares slope ($m$) and intercept ($c$) using formulas $m = \frac{n\sum xy - \sum x \sum y}{n\sum x^2 - (\sum x)^2}$.</div>
+                        <div><strong>Step 3:</strong> Applying unknown sample interpolation formula: $C_{unknown} = \frac{A_{sample} - c}{m}$.</div>
+                    </div>
+                </div>
+
                 <div class="space-y-4 pt-2">
                     <h4 class="text-lg font-bold text-slate-900">Verify Unknown Sample</h4>
                     <label class="block text-xs text-slate-600">Enter Absorbance of Unknown Sample:</label>
@@ -166,12 +174,9 @@
                 </div>
             </div>
 
-            <!-- Module 2: Reaction Kinetics with Expandable Time/Pencil Icon Feature -->
             <div id="view-module2" class="space-y-6 hidden">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-bold text-slate-900">Current Dashboard: 2. Reaction Kinetics</h2>
-                    
-                    <!-- Pencil Icon Trigger to Expand Duration -->
                     <button id="expandKineticsBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded text-xs font-semibold text-slate-700 transition-colors shadow-sm" title="Expand Time Range">
                         <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
@@ -180,7 +185,6 @@
                     </button>
                 </div>
 
-                <!-- Hidden expansion control panel that pops up on clicking the pencil icon -->
                 <div id="kineticsControlPanel" class="p-4 bg-slate-50 border border-slate-200 rounded-lg hidden space-y-3">
                     <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Configure Kinetics Duration & Rows</h3>
                     <div class="flex flex-wrap items-center gap-3">
@@ -201,7 +205,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="space-y-4">
                         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Reaction Kinetics Data</h3>
-                        <div class="overflow-x-auto max-h-80 overflow-y-auto border border-slate-200 rounded">
+                        <div class="overflow-x-auto max-h-72 overflow-y-auto border border-slate-200 rounded">
                             <table class="w-full text-xs text-left text-slate-700">
                                 <thead class="bg-slate-100 text-slate-800 font-semibold uppercase sticky top-0">
                                     <tr><th class="p-2 border border-slate-200">Time (s)</th><th class="p-2 border border-slate-200">Absorbance</th></tr>
@@ -218,14 +222,23 @@
                             <div id="m2Rate">Rate Constant (k): ...</div>
                             <div id="m2Half">Half-life: ...</div>
                         </div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-bold text-slate-800">Step-by-Step Kinetics Breakdown</h4>
+                            <div id="m2Steps" class="p-4 bg-slate-50 border border-slate-200 rounded text-xs text-slate-700 space-y-2 leading-relaxed">
+                                <div><strong>Step 1:</strong> Mapping Time ($t$) vs Absorbance ($A$) decay points.</div>
+                                <div><strong>Step 2:</strong> Fitting linear rate equation $A(t) = -kt + A_0$ to find pseudo-first-order rate constant $k = |slope|$.</div>
+                                <div><strong>Step 3:</strong> Computing half-life using $t_{1/2} = \frac{0.693}{k}$.</div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="bg-white border border-slate-200 rounded p-4 flex items-center justify-center">
                         <canvas id="chartModule2" class="w-full h-72"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Module 3 -->
             <div id="view-module3" class="space-y-6 hidden">
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Current Dashboard: 3. Job's Composition</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -246,7 +259,17 @@
                             </table>
                         </div>
                         <div class="text-xs text-slate-700 p-3 bg-slate-50 rounded border border-slate-200" id="m3Peak">Peak Detected Apex at: ...</div>
+
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-bold text-slate-800">Step-by-Step Stoichiometry Breakdown</h4>
+                            <div id="m3Steps" class="p-4 bg-slate-50 border border-slate-200 rounded text-xs text-slate-700 space-y-2 leading-relaxed">
+                                <div><strong>Step 1:</strong> Tabulating continuous variation mole fractions ($X_M$) against measured absorbance values.</div>
+                                <div><strong>Step 2:</strong> Locating maximum deviation or apex point where complex formation is highest.</div>
+                                <div><strong>Step 3:</strong> Determining metal-to-ligand ratio using formula ratio = $X_{apex} / (1 - X_{apex})$.</div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="bg-white border border-slate-200 rounded p-4 flex items-center justify-center">
                         <canvas id="chartModule3" class="w-full h-72"></canvas>
                     </div>
@@ -316,23 +339,19 @@
             });
         });
 
-        // Pencil icon toggle for Kinetics expansion panel
         const expandKineticsBtn = document.getElementById('expandKineticsBtn');
         const kineticsControlPanel = document.getElementById('kineticsControlPanel');
         expandKineticsBtn.addEventListener('click', () => {
             kineticsControlPanel.classList.toggle('hidden');
         });
 
-        // Apply custom time extension logic for Module 2
         document.getElementById('applyKineticsExtension').addEventListener('click', () => {
             let maxTime = parseInt(document.getElementById('maxTimeInput').value) || 180;
             let interval = parseInt(document.getElementById('timeIntervalInput').value) || 10;
             let tbody = document.getElementById('mod2TableBody');
             
-            // Retain old values if possible, or generate mock decay curve values
             tbody.innerHTML = '';
             for (let t = 0; t <= maxTime; t += interval) {
-                // Generate a smooth simulated exponential decay absorbance based on time for convenience
                 let mockAbs = Math.max(0.05, 2.0 * Math.exp(-0.015 * t)).toFixed(2);
                 let row = document.createElement('tr');
                 row.innerHTML = `
@@ -342,7 +361,6 @@
                 tbody.appendChild(row);
             }
 
-            // Re-bind input event listeners to newly generated inputs
             document.querySelectorAll('.m2-t, .m2-a').forEach(input => {
                 input.addEventListener('input', updateCharts);
             });
@@ -384,7 +402,7 @@
             let denom = (n * sumXX - sumX * sumX);
             let m = denom === 0 ? 0 : (n * sumXY - sumX * sumY) / denom;
             let c = (sumY - m * sumX) / n;
-            return { m, c };
+            return { m, c, sumX, sumY, sumXY, sumXX };
         }
 
         function updateModule1() {
@@ -411,6 +429,13 @@
             let unknownAbs = parseFloat(document.getElementById('unknownAbs').value) || 0;
             let predConc = fit.m !== 0 ? (unknownAbs - fit.c) / fit.m : 0;
             document.getElementById('unknownResult').innerText = `${predConc.toFixed(4)} M`;
+
+            // Dynamic Step-by-Step Justification Text with live numbers
+            document.getElementById('m1Steps').innerHTML = `
+                <div><strong>Step 1 (Data Points):</strong> Loaded ${x.length} concentration-absorbance coordinate pairs. Sum of X = ${fit.sumX.toFixed(2)}, Sum of Y = ${fit.sumY.toFixed(2)}.</div>
+                <div><strong>Step 2 (Linear Fit):</strong> Computed slope <code>m = ${fit.m.toFixed(4)}</code> and intercept <code>c = ${fit.c.toFixed(4)}</code> via least-squares regression.</div>
+                <div><strong>Step 3 (Interpolation):</strong> For Unknown Absorbance ($A$ = ${unknownAbs}), calculated Concentration = $\\frac{${unknownAbs} - (${fit.c.toFixed(4)})}{${fit.m.toFixed(4)}} = $ <strong>${predConc.toFixed(4)} M</strong>.</div>
+            `;
 
             let fitLine = x.map(val => fit.m * val + fit.c);
 
@@ -474,8 +499,18 @@
 
             if(time.length > 1) {
                 let fit = linearRegression(time, absRaw);
-                document.getElementById('m2Rate').innerText = `Rate Constant (k): ${Math.abs(fit.m).toFixed(4)} s⁻¹`;
-                document.getElementById('m2Half').innerText = `Half-life: ${(0.693 / (Math.abs(fit.m) || 1)).toFixed(2)} s`;
+                let rateK = Math.abs(fit.m);
+                let halfLife = rateK > 0 ? (0.693 / rateK) : 0;
+
+                document.getElementById('m2Rate').innerText = `Rate Constant (k): ${rateK.toFixed(4)} s⁻¹`;
+                document.getElementById('m2Half').innerText = `Half-life: ${halfLife.toFixed(2)} s`;
+
+                // Dynamic step-by-step update for Module 2
+                document.getElementById('m2Steps').innerHTML = `
+                    <div><strong>Step 1 (Time Series):</strong> Evaluated ${time.length} kinetics measurements from $t = ${time[0]}s$ to $t = ${time[time.length-1]}s$.</div>
+                    <div><strong>Step 2 (Rate Constant):</strong> Determined slope magnitude <code>k = |${fit.m.toFixed(4)}| = ${rateK.toFixed(4)} s⁻¹</code> representing the reaction decay rate.</div>
+                    <div><strong>Step 3 (Half-Life Calculation):</strong> Computed $t_{1/2} = \\frac{0.693}{${rateK.toFixed(4)}} = $ <strong>${halfLife.toFixed(2)} s</strong>.</div>
+                `;
 
                 if(chart2) chart2.destroy();
                 const ctx = document.getElementById('chartModule2').getContext('2d');
@@ -514,7 +549,15 @@
                 for(let i=1; i<yVal.length; i++) {
                     if(yVal[i] > maxVal) { maxVal = yVal[i]; maxIdx = i; }
                 }
-                document.getElementById('m3Peak').innerHTML = `Peak Detected Apex at Mole Fraction: <strong>${xVal[maxIdx]}</strong>`;
+                let apexX = xVal[maxIdx];
+                document.getElementById('m3Peak').innerHTML = `Peak Detected Apex at Mole Fraction: <strong>${apexX}</strong>`;
+
+                // Dynamic step-by-step update for Module 3
+                document.getElementById('m3Steps').innerHTML = `
+                    <div><strong>Step 1 (Variation Analysis):</strong> Scanned ${xVal.length} mole fraction mixture points ranging from ${xVal[0]} to ${xVal[xVal.length-1]}.</div>
+                    <div><strong>Step 2 (Apex Detection):</strong> Maximum absorbance peak identified at $A_{max} = ${maxVal}$ where fraction $X_M = ${apexX}$.</div>
+                    <div><strong>Step 3 (Stoichiometry Justification):</strong> Metal-to-Ligand stoichiometric ratio resolved as <code>${apexX} : ${(1 - apexX).toFixed(1)}</code> indicating complex composition.</div>
+                `;
 
                 if(chart3) chart3.destroy();
                 const ctx = document.getElementById('chartModule3').getContext('2d');
